@@ -3,8 +3,9 @@ import Button from "@material-tailwind/react/Button";
 import Icon from "@material-tailwind/react/Icon"
 
 
-const NavBar = () => {
+const NavBar = ({className, setOpenMenu}) => {
 	const [searchInput, setSearchInput] = useState("");
+
 	const handleSearch = () => {
 		if(searchInput.length != 0){
 			alert("s")
@@ -12,10 +13,10 @@ const NavBar = () => {
 	}
 
 	return (
-		<div className={"w-full h-[60px] bg-gray-100 flex items-center gap-2 px-1"}>
-			<div className={"md:hidden"}>
+		<div className={"w-full h-[60px] bg-background flex items-center gap-2 px-1" + " " + className}>
+			<IconButton className={"md:hidden"} onClick={()=>{setOpenMenu(prev => !prev)}}>
 				<Icon name={"menu"} size={"4xl"} color={"green"}/>
-			</div>
+			</IconButton>
 			<input
 				placeholder={"Search in documentation"}
 				className={"flex-grow h-10 pl-2"}
@@ -39,6 +40,22 @@ const NavBar = () => {
 	);
 };
 
-
+const IconButton = ({children, onClick, className}) => {
+	return (
+		<Button
+			color="blueGray"
+			buttonType="link"
+			size="regular"
+			rounded={true}
+			block={false}
+			iconOnly={true}
+			ripple="dark"
+			onClick = {onClick}
+			className = {className}
+		>
+			{children}
+		</Button>
+	);
+};
 
 export default NavBar;

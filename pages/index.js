@@ -1,12 +1,16 @@
 import Head from 'next/head'
 import {Input} from "postcss";
 import NavBar from "../components/NavBar";
+import SideBar from "../components/SideBar";
+import Body from "../components/Body";
+import {useState} from "react";
 
 export default function Home() {
+  const [openMenu, setOpenMenu] = useState(true);
   return (
     <div className="">
       <Head>
-        <title>Create Next App</title>
+        <title>FinnQL</title>
         <link
           href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet"
@@ -19,7 +23,15 @@ export default function Home() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <NavBar/>
+      <main className={""}>
+        <NavBar openMenu={openMenu} setOpenMenu = {setOpenMenu}/>
+        <div className={"w-full flex"}>
+          { openMenu && <SideBar className={""}/>}
+          <Body/>
+        </div>
+
+      </main>
+
 
 
     </div>
